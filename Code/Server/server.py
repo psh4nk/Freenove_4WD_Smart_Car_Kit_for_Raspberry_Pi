@@ -8,6 +8,8 @@ import picamera
 import fcntl
 import  sys
 import threading
+import VideoStream
+import cv2
 from Motor import *
 from servo import *
 from Led import *
@@ -80,6 +82,7 @@ class Server:
             pass
         self.server_socket.close()
         try:
+            #VideoStream.process(self.server_socket)
             with picamera.PiCamera() as camera:
                 camera.resolution = (400,300)      # pi camera resolution
                 camera.framerate = 15               # 15 frames/sec
@@ -119,7 +122,7 @@ class Server:
             stop_thread(self.lightRun)
             self.PWM.setMotorModel(0,0,0,0)
         except:
-            pass            
+            pass
         try:
             stop_thread(self.ultrasonicRun)
             self.PWM.setMotorModel(0,0,0,0)
