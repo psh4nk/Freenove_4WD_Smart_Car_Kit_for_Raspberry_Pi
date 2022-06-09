@@ -161,17 +161,17 @@ class VideoStreaming:
                 xmax = int(min(imW,(boxes[max_index][3] * imW)))
                 self.face_x = float(xmin+xmax/2)
                 self.face_y = float(ymin+ymax/2)
-                ForWard = '#300#300#300#300\n'
-                BackWard = '#-1500#-1500#-1500#-1500\n'
-                Left = '#-1500#-1500#1500#1500\n'
-                Right = '#1500#1500#-1500#-1500\n'
-                self.sendData(cmd.CMD_MOTOR+ForWard)
+                #ForWard = '#300#300#300#300\n'
+                #BackWard = '#-1500#-1500#-1500#-1500\n'
+                #Left = '#-1500#-1500#1500#1500\n'
+                #Right = '#1500#1500#-1500#-1500\n'
+#                self.sendData(cmd.CMD_MOTOR+ForWard)
             else:
                 # If the desired object was not found, set face coords back to (0,0)
                 self.face_x = 0
                 self.face_y = 0
                 Stop = '#0#0#0#0\n'
-                self.sendData(cmd.CMD_MOTOR+Stop)
+                #self.sendData(cmd.CMD_MOTOR+Stop)
 
 
             # Draw framerate in corner of frame
@@ -179,6 +179,7 @@ class VideoStreaming:
 
         cv2.imwrite('video.jpg', frame)
 
+        # Face detection
         #    if len(faces)>0 :
         #        for (x,y,w,h) in faces:
         #            self.face_x=float(x+w/2.0)
