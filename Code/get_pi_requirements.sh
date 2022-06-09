@@ -15,7 +15,7 @@ pip3 install opencv-python==3.4.11.41
 # Using the tflite_runtime packages available at https://www.tensorflow.org/lite/guide/python
 # Will change to just 'pip3 install tensorflow' once newer versions of TF are added to piwheels
 
-#pip3 install tensorflow
+pip3 install tensorflow
 
 version=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
 
