@@ -77,7 +77,11 @@ class VideoStreaming:
             if labels[0] == '???':
                 del(labels[0])
 
+            # Use tensorflow library
             interpreter = tf.lite.Interpreter(model_path=PATH_TO_CKPT)
+
+            # Uncomment to use tflite library
+            #interpreter = Interpreter(model_path=PATH_TO_CKPT)
 
             interpreter.allocate_tensors()
 
