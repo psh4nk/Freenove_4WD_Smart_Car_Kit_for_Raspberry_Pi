@@ -9,7 +9,7 @@ LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
 LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
-# Define functions which animate LEDs in various ways.v
+# Define functions which animate LEDs in various ways.vfddhdghg
 class Led: #
     def __init__(self):
         #Control the sending order of color data
