@@ -8,7 +8,7 @@ import picamera
 import fcntl
 import  sys
 import threading
-import VideoStream
+#import VideoStream
 import cv2
 from Motor import *
 from servo import *
