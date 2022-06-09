@@ -95,7 +95,7 @@ class mywindow(QMainWindow,Ui_server_ui):
             self.Button_Server.setText("Off")
             self.TCP_Server.tcp_Flag = True
             print ("Open TCP")
-            self.TCP_Server.StartTcpServer()
+            self.TCP_Server.StartTcpServer() #fsd;lkjasdg
             self.SendVideo=Thread(target=self.TCP_Server.sendvideo)
             self.ReadData=Thread(target=self.TCP_Server.readdata)
             self.power=Thread(target=self.TCP_Server.Power)
