@@ -49,8 +49,8 @@ class VideoStreaming:
     def find_bottle(self,img):
         if sys.platform.startswith('win') or sys.platform.startswith('darwin'):
 
-        #   gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-        #    faces = self.face_cascade.detectMultiScale(gray,1.3,5)
+            gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+            faces = self.face_cascade.detectMultiScale(gray,1.3,5)
 
             MODEL_NAME = 'Sample_TFLite_model'
             GRAPH_NAME = 'detect.tflite'
@@ -178,8 +178,6 @@ class VideoStreaming:
             cv2.putText(frame,'FPS: {0:.2f}'.format(frame_rate_calc),(30,50),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,0),2,cv2.LINE_AA)
 
         cv2.imwrite('video.jpg', frame)
-
-<<<<<<< HEAD
         if len(faces)>0 :
             for (x,y,w,h) in faces:
                 self.face_x=float(x+w/2.0)
@@ -189,18 +187,6 @@ class VideoStreaming:
             self.face_x=0
             self.face_y=0
         cv2.imwrite('video.jpg',img)
-=======
-        # Face detection
-        #    if len(faces)>0 :
-        #        for (x,y,w,h) in faces:
-        #            self.face_x=float(x+w/2.0)
-        #            self.face_y=float(y+h/2.0)
-        #            img= cv2.circle(img, (int(self.face_x),int(self.face_y)), int((w+h)/4), (0, 255, 0), 2)
-        #    else:
-        #        self.face_x=0
-        #        self.face_y=0
-        #cv2.imwrite('video.jpg',img)
->>>>>>> 3f81dacaa0d0dd21c82c8a3a81c9cdd58f5f91f9
         
     def streaming(self,ip):
         stream_bytes = b' '
