@@ -4,6 +4,7 @@ import io
 import socket
 import struct
 import time
+from Code.Server.Avoid import Avoid
 import picamera
 import fcntl
 import  sys
@@ -31,6 +32,7 @@ class Server:
         self.ultrasonic=Ultrasonic()
         self.buzzer=Buzzer()
         self.adc=Adc()
+        self.avoid = Avoid()
         self.light=Light()
         self.infrared=Line_Tracking()
         self.tcp_Flag = True
@@ -188,7 +190,7 @@ class Server:
                         elif data[1]=='five' or data[1]=="2":
                             self.stopMode()
                             self.Mode='five'
-                            self.infraredRun=threading.Thread(target=self.ultrasonic.run)
+                            self.infraredRun=threading.Thread(target=self.avoid.run)
                             self.infraredRun.start()
                             
                     elif (cmd.CMD_MOTOR in data) and self.Mode=='one':
