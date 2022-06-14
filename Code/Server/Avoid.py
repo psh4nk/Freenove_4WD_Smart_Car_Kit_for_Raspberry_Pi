@@ -19,10 +19,10 @@ class Avoid:
                 self.LMR=(self.LMR | 2)
             if GPIO.input(self.IR03)==True:
                 self.LMR=(self.LMR | 1)
-            if self.LMR > 0:
-                PWM.setMotorModel(-400,-400,-400,-400)
+            if self.LMR < 7:
+                PWM.setMotorModel(-800,-800,-800,-800)
                 time.sleep(3)
-                PWM.setMotorModel(400, 400, -400, -400)
+                PWM.setMotorModel(800, 800, -800, -800)
                 time.sleep(1)
             #    elif self.LMR==2:
             #        PWM.setMotorModel(800,800,800,800)
@@ -34,15 +34,15 @@ class Avoid:
             #        PWM.setMotorModel(2500,2500,-1500,-1500)
             #    elif self.LMR==3:
             #        PWM.setMotorModel(4000,4000,-2000,-2000)
-            #    elif self.LMR==7:
-            #        #pass
-            #        PWM.setMotorModel(0,0,0,0)
+            elif self.LMR==7:
+                #pass
+                PWM.setMotorModel(800,800,800,800)
             
-infrared=Line_Tracking()
+infrared=Avoid()
 # Main program logic follows:
 if __name__ == '__main__':
     print ('Program is starting ... ')
     try:
-        infrared.run()
+        Avoid.run()
     except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program  will be  executed.
         PWM.setMotorModel(0,0,0,0)
