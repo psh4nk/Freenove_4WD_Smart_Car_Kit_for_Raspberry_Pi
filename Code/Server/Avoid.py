@@ -19,7 +19,10 @@ class Avoid:
                 self.LMR=(self.LMR | 2)
             if GPIO.input(self.IR03)==True:
                 self.LMR=(self.LMR | 1)
-            if self.LMR < 7:
+            if self.LMR==7:
+                #pass
+                PWM.setMotorModel(800,800,800,800)
+            elif self.LMR < 7:
                 PWM.setMotorModel(-800,-800,-800,-800)
                 time.sleep(3)
                 PWM.setMotorModel(800, 800, -800, -800)
@@ -34,9 +37,6 @@ class Avoid:
             #        PWM.setMotorModel(2500,2500,-1500,-1500)
             #    elif self.LMR==3:
             #        PWM.setMotorModel(4000,4000,-2000,-2000)
-            elif self.LMR==7:
-                #pass
-                PWM.setMotorModel(800,800,800,800)
             
 infrared=Avoid()
 # Main program logic follows:
