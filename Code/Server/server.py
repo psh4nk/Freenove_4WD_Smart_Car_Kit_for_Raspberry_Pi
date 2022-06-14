@@ -185,6 +185,11 @@ class Server:
                             self.Mode='four'
                             self.infraredRun=threading.Thread(target=self.infrared.run)
                             self.infraredRun.start()
+                        elif data[1]=='five' or data[1]=="2":
+                            self.stopMode()
+                            self.Mode='five'
+                            self.infraredRun=threading.Thread(target=self.ultrasonic.run)
+                            self.infraredRun.start()
                             
                     elif (cmd.CMD_MOTOR in data) and self.Mode=='one':
                         try:
