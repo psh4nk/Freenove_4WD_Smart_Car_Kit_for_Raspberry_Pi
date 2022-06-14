@@ -1,7 +1,7 @@
 import time
 from Motor import *
 import RPi.GPIO as GPIO
-class Line_Tracking:
+class Avoid:
     def __init__(self):
         self.IR01 = 14
         self.IR02 = 15
