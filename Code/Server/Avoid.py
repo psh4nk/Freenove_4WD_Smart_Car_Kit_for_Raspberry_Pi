@@ -19,7 +19,7 @@ class Avoid:
                 self.LMR=(self.LMR | 2)
             if GPIO.input(self.IR03)==True:
                 self.LMR=(self.LMR | 1)
-            if self.LMR==7:
+            if self.LMR==0:
                 #pass
                 PWM.setMotorModel(800,800,800,800)
             elif self.LMR < 7:
