@@ -22,7 +22,7 @@ class Avoid:
             if self.LMR==0:
                 #pass
                 PWM.setMotorModel(800,800,800,800)
-            elif self.LMR < 7:
+            elif self.LMR > 0:
                 PWM.setMotorModel(-800,-800,-800,-800)
                 time.sleep(3)
                 PWM.setMotorModel(800, 800, -800, -800)
