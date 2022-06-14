@@ -113,8 +113,11 @@ class mywindow(QMainWindow,Ui_Client):
         self.Btn_Mode3.toggled.connect(lambda:self.on_btn_Mode(self.Btn_Mode3))
         self.Btn_Mode4.setChecked(False)
         self.Btn_Mode4.toggled.connect(lambda:self.on_btn_Mode(self.Btn_Mode4))
+        self.Btn_Avoiding_Line.setChecked(False)
+        self.Btn_Avoiding_Line.toggled.connect(lambda:self.on_btn_Mode(self.Btn_Avoiding_Line))
         
         self.Ultrasonic.clicked.connect(self.on_btn_Ultrasonic)
+        self.Btn_Avoiding_Line.clicked.connect(self.on_btn_Avoid)
         self.Light.clicked.connect(self.on_btn_Light)
         
         self.Btn_ForWard.pressed.connect(self.on_btn_ForWard)
@@ -367,6 +370,12 @@ class mywindow(QMainWindow,Ui_Client):
         else:
             self.TCP.sendData(cmd.CMD_SONIC+self.intervalChar+'0'+self.endChar)
             self.Ultrasonic.setText("Ultrasonic")
+    def on_btn_Avoid(self):
+        if self.Btn_Avoiding_Line.text()=="Avoid Line":
+            self.TCP.sendData(cmd.CMD_AVOID+self.intervalChar+'1'+self.endChar)
+        else:
+            self.TCP.sendData(cmd.CMD_AVOID+self.intervalChar+'0'+self.endChar)
+            self.Btn_Avoiding_Line.setText("Avoid Line")
  
     def on_btn_Light(self):
         if self.Light.text() == "Light":
@@ -504,6 +513,10 @@ class mywindow(QMainWindow,Ui_Client):
             if Mode.isChecked() == True:
                 #self.timer.stop()
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'four'+self.endChar)
+        if Mode.text() == "M-Avoid":
+            if Mode.isChecked() == True:
+                #self.timer.stop()
+                self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'five'+self.endChar)
          
                                   
     def on_btn_Connect(self):
@@ -607,6 +620,7 @@ class mywindow(QMainWindow,Ui_Client):
             self.Btn_Tracking_Faces.setText("Stop Looking")
         else:
             self.Btn_Tracking_Faces.setText("Find Bottle")
+    
     def find_bottle(self,face_x,face_y):
         if face_x!=0 and face_y!=0:
             offset_x=float(face_x/400-0.5)*2
