@@ -19,19 +19,24 @@ class Line_Tracking:
                 self.LMR=(self.LMR | 2)
             if GPIO.input(self.IR03)==True:
                 self.LMR=(self.LMR | 1)
-            if self.LMR==2:
-                PWM.setMotorModel(800,800,800,800)
-            elif self.LMR==4:
-                PWM.setMotorModel(-1500,-1500,2500,2500)
-            elif self.LMR==6:
-                PWM.setMotorModel(-2000,-2000,4000,4000)
-            elif self.LMR==1:
-                PWM.setMotorModel(2500,2500,-1500,-1500)
-            elif self.LMR==3:
-                PWM.setMotorModel(4000,4000,-2000,-2000)
-            elif self.LMR==7:
-                #pass
-                PWM.setMotorModel(0,0,0,0)
+            if self.LMR > 0:
+                PWM.setMotorModel(-400,-400,-400,-400)
+                time.sleep(3)
+                PWM.setMotorModel(400, 400, -400, -400)
+                time.sleep(1)
+            #    elif self.LMR==2:
+            #        PWM.setMotorModel(800,800,800,800)
+            #    elif self.LMR==4:
+            #        PWM.setMotorModel(-1500,-1500,2500,2500)
+            #    elif self.LMR==6:
+            #        PWM.setMotorModel(-2000,-2000,4000,4000)
+            #    elif self.LMR==1:
+            #        PWM.setMotorModel(2500,2500,-1500,-1500)
+            #    elif self.LMR==3:
+            #        PWM.setMotorModel(4000,4000,-2000,-2000)
+            #    elif self.LMR==7:
+            #        #pass
+            #        PWM.setMotorModel(0,0,0,0)
             
 infrared=Line_Tracking()
 # Main program logic follows:
