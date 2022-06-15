@@ -46,7 +46,7 @@ class VideoStreaming:
                 bValid = False
         return bValid
 
-    def find_bottle(self,img):
+    def find_bottle(self,img, value):
         if sys.platform.startswith('win') or sys.platform.startswith('darwin'):
 
             gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -133,7 +133,7 @@ class VideoStreaming:
             # Loop over all detections and draw detection box if confidence is above minimum threshold
             for i in range(len(scores)):
                 # Found desired object with decent confidence
-                if ((labels[int(classes[i])] == 'bottle') and (scores[i] > max_score) and (scores[i] > min_conf_threshold) and (scores[i] <= 1.0)):
+                if ((labels[int(classes[i])] == value) and (scores[i] > max_score) and (scores[i] > min_conf_threshold) and (scores[i] <= 1.0)):
                     # Get bounding box coordinates and draw box
                     # Interpreter can return coordinates that are outside of image dimensions, need to force them to be within image using max() and min()
                     ymin = int(max(1,(boxes[i][0] * imH)))
@@ -204,8 +204,12 @@ class VideoStreaming:
                 if self.IsValidImage4Bytes(jpg):
                             image = cv2.imdecode(np.frombuffer(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
                             if self.video_Flag:
-                                self.find_bottle(image)
-                                self.video_Flag=False
+                                if self.Btn_Tracking_Faces.text()=="Stop Looking":
+                                    self.find_bottle(image, 'bottle')
+                                    self.video_Flag=False
+                                elif self.Btn_Tracking_Balls.text()=="Stop Looking":
+                                    self.find_bottle(image, 'sports ball')
+                                    self.video_Flag=False
             except Exception as e:
                 print (e)
                 break
