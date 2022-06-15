@@ -1,6 +1,5 @@
 #!/usr/bin/python 
 # -*- coding: utf-8 -*-
-from Code.Client.CameraType import CameraType
 import numpy as np
 import cv2
 import socket
@@ -16,6 +15,7 @@ from PIL import Image
 from Command import COMMAND as cmd
 from Thread import *
 from Client_Ui import Ui_Client
+from CameraType import CameraType
 from Video import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
@@ -621,18 +621,18 @@ class mywindow(QMainWindow,Ui_Client):
     def Tracking_Face(self):
         if self.Btn_Tracking_Faces.text()=="Find Bottle":
             self.Btn_Tracking_Faces.setText("Stop Looking")
-            CameraType.setType("person")
+            cType.setType("person")
         else:
             self.Btn_Tracking_Faces.setText("Find Bottle")
-            CameraType.setType("")
+            cType.setType("")
     
     def Tracking_Ball(self):
         if self.Btn_Tracking_Balls.text()=="Find Ball":
             self.Btn_Tracking_Balls.setText("Stop Looking")
-            CameraType.setType("sports ball")
+            cType.setType("sports ball")
         else:
             self.Btn_Tracking_Balls.setText("Find Ball")
-            CameraType.setType("")
+            cType.setType("")
 
     
     def find_bottle(self,face_x,face_y):

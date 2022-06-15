@@ -1,6 +1,6 @@
 class CameraType:
-    def __init__(self):
-        self.word = ""
+    
+    word = ""
     
     def getType(self):
         return self.word

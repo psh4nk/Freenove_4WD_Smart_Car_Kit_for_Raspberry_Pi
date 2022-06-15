@@ -50,7 +50,7 @@ class VideoStreaming():
                 bValid = False
         return bValid
 
-    def find_bottle(self,img, value):
+    def find_bottle(self,img):
         if sys.platform.startswith('win') or sys.platform.startswith('darwin'):
 
             gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
