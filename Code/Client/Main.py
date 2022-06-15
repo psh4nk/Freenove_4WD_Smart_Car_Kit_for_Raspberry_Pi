@@ -1,5 +1,6 @@
 #!/usr/bin/python 
 # -*- coding: utf-8 -*-
+from Code.Client.CameraType import CameraType
 import numpy as np
 import cv2
 import socket
@@ -620,14 +621,19 @@ class mywindow(QMainWindow,Ui_Client):
     def Tracking_Face(self):
         if self.Btn_Tracking_Faces.text()=="Find Bottle":
             self.Btn_Tracking_Faces.setText("Stop Looking")
+            CameraType.setType("person")
         else:
             self.Btn_Tracking_Faces.setText("Find Bottle")
+            CameraType.setType("")
     
     def Tracking_Ball(self):
         if self.Btn_Tracking_Balls.text()=="Find Ball":
             self.Btn_Tracking_Balls.setText("Stop Looking")
+            CameraType.setType("sports ball")
         else:
             self.Btn_Tracking_Balls.setText("Find Ball")
+            CameraType.setType("")
+
     
     def find_bottle(self,face_x,face_y):
         if face_x!=0 and face_y!=0:
