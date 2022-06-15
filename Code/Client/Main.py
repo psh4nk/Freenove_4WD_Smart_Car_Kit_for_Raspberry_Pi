@@ -676,7 +676,10 @@ class mywindow(QMainWindow,Ui_Client):
                 # Set direction that wheels need to turn to face object
                 turn_angle = math.degrees(math.atan2(delta_degree_y, delta_degree_x))
                 print(turn_angle)
-                if(math.fabs(turn_angle) >= 20):
+                if (math.fabs(turn_angle) <= 80) and (math.fabs(turn_angle) >= 20):
+                    #Object is straight ahead, go forward
+                    direction = self.intervalChar+str(600)+self.intervalChar+str(600)+self.intervalChar+str(600)+self.intervalChar+str(600)+self.endChar
+                elif(math.fabs(turn_angle) > 80):
                     # Object is on our left, turn left
                     direction = self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.endChar
                 elif(math.fabs(turn_angle) < 20):
