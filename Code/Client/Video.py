@@ -145,6 +145,14 @@ class VideoStreaming():
                     ymax = int(min(imH,(boxes[i][2] * imH)))
                     xmax = int(min(imW,(boxes[i][3] * imW)))
 
+                    #find bounding box center
+                    cx = (xmax - xmin)/ 2 + xmin
+                    cy = (ymax - ymin)/ 2 + ymin
+
+                    #find center color
+                    pixel_center = frame[cy,cx]
+                    
+
                     # Draw label
                     object_name = labels[int(classes[i])] # Look up object name from "labels" array using class index
                     label = '%s: %d%%' % (object_name, int(scores[i]*100)) # Example: 'person: 72%'
@@ -153,6 +161,8 @@ class VideoStreaming():
                     cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (10, 255, 0), 2)
                     cv2.rectangle(frame, (xmin, label_ymin-labelSize[1]-10), (xmin+labelSize[0], label_ymin+baseLine-10), (255, 255, 255), cv2.FILLED) # Draw white box to put label text in
                     cv2.putText(frame, label, (xmin, label_ymin-7), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2) # Draw label text
+                    #if cType.getType() == "ball":
+                        
 
                     # Record current max
                     max_score = scores[i]
@@ -207,6 +217,7 @@ class VideoStreaming():
                 jpg=self.connection.read(leng[0])
                 if self.IsValidImage4Bytes(jpg):
                     image = cv2.imdecode(np.frombuffer(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
+
                     if self.video_Flag:
                         if self.video_Flag:
                                 self.find_bottle(image)
