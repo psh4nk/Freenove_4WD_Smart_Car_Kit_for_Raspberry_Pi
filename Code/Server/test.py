@@ -70,6 +70,21 @@ def test_Infrared():
     except KeyboardInterrupt:
         print ("\nEnd of program")
 
+from Avoid import *
+line = Avoid()
+def test_Avoid():
+    try:
+        while True:
+            if GPIO.input(line.IR01)!=True and GPIO.input(line.IR02)==True and GPIO.input(line.IR03)!=True:
+                print ('Middle')
+            elif GPIO.input(line.IR01)!=True and GPIO.input(line.IR02)!=True and GPIO.input(line.IR03)==True:
+                print ('Right')
+            elif GPIO.input(line.IR01)==True and GPIO.input(line.IR02)!=True and GPIO.input(line.IR03)!=True:
+                print ('Left')
+    except KeyboardInterrupt:
+        print ("\nEnd of program")
+
+
 
 from servo import *
 pwm=Servo()
