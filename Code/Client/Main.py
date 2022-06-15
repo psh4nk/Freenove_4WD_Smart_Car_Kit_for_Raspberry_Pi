@@ -141,7 +141,7 @@ class mywindow(QMainWindow,Ui_Client):
         self.Btn_Home.clicked.connect(self.on_btn_Home)
         self.Btn_Right.clicked.connect(self.on_btn_Right)
         self.Btn_Tracking_Faces.clicked.connect(self.Tracking_Face)
-        self.Btn_Tracking_Balls.clicked.connect(self.find_ball)
+        self.Btn_Tracking_Balls.clicked.connect(self.Tracking_Face)
         
 
         self.Btn_Buzzer.pressed.connect(self.on_btn_Buzzer)
