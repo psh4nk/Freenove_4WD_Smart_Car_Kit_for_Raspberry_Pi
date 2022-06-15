@@ -141,7 +141,7 @@ class mywindow(QMainWindow,Ui_Client):
         self.Btn_Home.clicked.connect(self.on_btn_Home)
         self.Btn_Right.clicked.connect(self.on_btn_Right)
         self.Btn_Tracking_Faces.clicked.connect(self.Tracking_Face)
-        self.Btn_Tracking_Balls.clicked.connect(self.Tracking_Face)
+        self.Btn_Tracking_Balls.clicked.connect(self.Tracking_Ball)
         
 
         self.Btn_Buzzer.pressed.connect(self.on_btn_Buzzer)
@@ -623,6 +623,12 @@ class mywindow(QMainWindow,Ui_Client):
         else:
             self.Btn_Tracking_Faces.setText("Find Bottle")
     
+    def Tracking_Ball(self):
+        if self.Btn_Tracking_Balls.text()=="Find Ball":
+            self.Btn_Tracking_Balls.setText("Stop Looking")
+        else:
+            self.Btn_Tracking_Balls.setText("Find Ball")
+    
     def find_bottle(self,face_x,face_y):
         if face_x!=0 and face_y!=0:
             offset_x=float(face_x/400-0.5)*2
@@ -685,6 +691,8 @@ class mywindow(QMainWindow,Ui_Client):
                 self.label_Video.setPixmap(QPixmap('video.jpg'))
                 if self.Btn_Tracking_Faces.text()=="Stop Looking":
                         self.find_bottle(self.TCP.face_x,self.TCP.face_y)
+                if self.Btn_Tracking_Balls.text()=="Stop Looking":
+                        self.find_ball(self.TCP.face_x,self.TCP.face_y)
         except Exception as e:
             print(e)
         self.TCP.video_Flag=True
