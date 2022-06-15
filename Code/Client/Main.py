@@ -114,10 +114,8 @@ class mywindow(QMainWindow,Ui_Client):
         self.Btn_Mode3.toggled.connect(lambda:self.on_btn_Mode(self.Btn_Mode3))
         self.Btn_Mode4.setChecked(False)
         self.Btn_Mode4.toggled.connect(lambda:self.on_btn_Mode(self.Btn_Mode4))
-        self.Btn_Avoiding_Line.setChecked(False)
         self.Btn_Tracking_Balls.setChecked(False)
         self.Btn_Tracking_Bottle.setChecked(False)
-        self.Btn_Avoiding_Line.toggled.connect(lambda:self.on_btn_Mode(self.Btn_Avoiding_Line))
         
         self.Ultrasonic.clicked.connect(self.on_btn_Ultrasonic)
         self.Btn_Avoiding_Line.clicked.connect(self.on_btn_Avoid)
@@ -376,11 +374,11 @@ class mywindow(QMainWindow,Ui_Client):
             self.TCP.sendData(cmd.CMD_SONIC+self.intervalChar+'0'+self.endChar)
             self.Ultrasonic.setText("Ultrasonic")
     def on_btn_Avoid(self):
-        if self.Btn_Avoiding_Line.text()=="Avoid Line":
+        if self.Btn_Avoiding_Line.text()=="M-Avoid":
             self.TCP.sendData(cmd.CMD_AVOID+self.intervalChar+'1'+self.endChar)
         else:
             self.TCP.sendData(cmd.CMD_AVOID+self.intervalChar+'0'+self.endChar)
-            self.Btn_Avoiding_Line.setText("Avoid Line")
+            self.Btn_Avoiding_Line.setText("M-Avoid")
  
     def on_btn_Light(self):
         if self.Light.text() == "Light":
