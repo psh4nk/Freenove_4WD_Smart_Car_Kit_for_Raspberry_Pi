@@ -20,6 +20,7 @@ from Thread import *
 from Light import *
 from Ultrasonic import *
 from Line_Tracking import *
+from Avoid import *
 from threading import Timer
 from threading import Thread
 from Command import COMMAND as cmd
@@ -35,6 +36,7 @@ class Server:
         self.avoid = Avoid()
         self.light=Light()
         self.infrared=Line_Tracking()
+        self.infraredA=Avoid()
         self.tcp_Flag = True
         self.sonic=False
         self.Light=False
