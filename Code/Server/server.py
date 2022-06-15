@@ -4,7 +4,6 @@ import io
 import socket
 import struct
 import time
-from Code.Server.Avoid import Avoid
 import picamera
 import fcntl
 import  sys
@@ -15,6 +14,7 @@ from Motor import *
 from servo import *
 from Led import *
 from Buzzer import *
+from Avoid import *
 from ADC import *
 from Thread import *
 from Light import *
