@@ -211,7 +211,7 @@ class VideoStreaming():
                     elif hue_value < 33:
                         #yellow
                         R = 255
-                        G = 255
+                        G = 230
                         B = 0
                     elif hue_value < 90:
                         #green
