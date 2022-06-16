@@ -629,22 +629,41 @@ class mywindow(QMainWindow,Ui_Client):
         else:
             self.Btn_Tracking_Faces.setText("Find Face")
             cType.setType("")
-    
-    def Tracking_Ball(self):
         
+    def Tracking_Ball(self):
         if self.Btn_Tracking_Balls.text()=="Find Ball":
             self.Btn_Tracking_Balls.setText("Stop Looking")
             cType.setType("sports ball")
-            frame = yesType.getImage()
-            
-            #find bounding box center
-            #next change color of LEDs using pixel_center
-            pixel_middle = frame[yesType.getCX(),yesType.getCY()]
-            self.led_Index=str(0x01)
-            self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+pixel_middle)
+                #R=pixelMiddle[2]
+                #G=pixelMiddle[1]
+                #B=pixelMiddle[0]
+                #print(R, G, B)
+            #led_Off=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+            #color=self.intervalChar+str(R)+self.intervalChar+str(G)+self.intervalChar+str(B)+self.endChar
+            #self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+pixel_middle)
+            #self.led_Index=str(0x01)
+            #self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
             #self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+ le)
         else:
             self.Btn_Tracking_Balls.setText("Find Ball")
+            self.led_Index=str(0x01)
+            led_Off=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+            self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+led_Off)
+            self.led_Index=str(0x02)
+            self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+led_Off)
+            self.led_Index=str(0x04)
+            self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+led_Off)
+            self.led_Index=str(0x08)
+            self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+led_Off)
+            self.led_Index=str(0x10)
+            self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+led_Off)
+            self.led_Index=str(0x20)
+            self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+led_Off)
+            self.led_Index=str(0x40)
+            self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+led_Off)
+            self.led_Index=str(0x80)
+            self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+led_Off)
+            #self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+led_Off)
             cType.setType("")
     
     def Tracking_Bottle(self):
