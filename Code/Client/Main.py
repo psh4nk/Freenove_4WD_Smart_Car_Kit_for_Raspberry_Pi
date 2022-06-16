@@ -21,6 +21,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+from imageGetter import imageGetter
+
 
 class mywindow(QMainWindow,Ui_Client):
     def __init__(self):
@@ -633,6 +635,7 @@ class mywindow(QMainWindow,Ui_Client):
         if self.Btn_Tracking_Balls.text()=="Find Ball":
             self.Btn_Tracking_Balls.setText("Stop Looking")
             cType.setType("sports ball")
+            frame = yesType.getImage()
             #next change color of LEDs using pixel_center
             self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+pixel_center)
         else:
