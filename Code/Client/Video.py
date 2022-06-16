@@ -185,7 +185,7 @@ class VideoStreaming():
                 xmax = int(min(imW,(boxes[max_index][3] * imW)))
                 self.face_x = float(xmin+xmax/2)
                 self.face_y = float(ymin+ymax/2)
-                #print(cx,cy)
+                #print(cx,cy)asd
                 if cType.getType() == "sports ball":
                     croppedImage = frame[ymin:ymax, xmin:xmax]
                     ccx = int((xmax - xmin)/2)
