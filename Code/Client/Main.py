@@ -636,9 +636,10 @@ class mywindow(QMainWindow,Ui_Client):
             self.Btn_Tracking_Balls.setText("Stop Looking")
             cType.setType("sports ball")
             frame = yesType.getImage()
+            
+            #find bounding box center
             #next change color of LEDs using pixel_center
-            frame = img.copy()
-            frame[cx,cy]
+            frame[yesType.getCX(),yesType.getCY()]
             #self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+ le)
         else:
             self.Btn_Tracking_Balls.setText("Find Ball")

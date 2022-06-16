@@ -154,6 +154,9 @@ class VideoStreaming():
                     cx = (xmax - xmin)/ 2 + xmin
                     cy = (ymax - ymin)/ 2 + ymin
 
+                    yesType.setCX(cx)
+                    yesType.setCY(cy)
+
                     if cType.getType() == "sports ball":
                         #find center color
                         setPixelCenter(frame[cy,cx])
