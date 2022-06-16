@@ -635,6 +635,7 @@ class mywindow(QMainWindow,Ui_Client):
         if self.Btn_Tracking_Balls.text()=="Find Ball":
             self.Btn_Tracking_Balls.setText("Stop Looking")
             cType.setType("sports ball")
+            frame = yesType.getImage()
             #next change color of LEDs using pixel_center
             frame = img.copy()
             frame[cx,cy]

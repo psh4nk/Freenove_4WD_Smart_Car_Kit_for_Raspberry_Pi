@@ -16,8 +16,11 @@ import tensorflow as tf
 import importlib.util
 import time
 from CameraType import CameraType
+from imageGetter import imageGetter
 global cType
 cType = CameraType()
+global yesType
+yesType = imageGetter()
 
 class VideoStreaming():
     def __init__(self):
@@ -71,6 +74,7 @@ class VideoStreaming():
             PATH_TO_LABELS = os.path.join(CWD_PATH,MODEL_NAME,LABELMAP_NAME)
 
             frame = img.copy()
+            yesType.setImage(frame)
 
             with open(PATH_TO_LABELS, 'r') as f:
                 labels = [line.strip() for line in f.readlines()]
