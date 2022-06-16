@@ -16,16 +16,22 @@ import tensorflow as tf
 import importlib.util
 import time
 from CameraType import CameraType
+from imageGetter import imageGetter
 global cType
 cType = CameraType()
+global yesType
+yesType = imageGetter()
 
+pixel_center = None
 class VideoStreaming():
     def __init__(self):
         self.face_cascade = cv2.CascadeClassifier(r'haarcascade_frontalface_default.xml')
         self.video_Flag=True
         self.connect_Flag=False
+        self.intervalChar='#'
         self.face_x=0
         self.face_y=0
+        self.endChar='\n'
     def StartTcpClient(self,IP):
         self.client_socket1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -71,6 +77,7 @@ class VideoStreaming():
             PATH_TO_LABELS = os.path.join(CWD_PATH,MODEL_NAME,LABELMAP_NAME)
 
             frame = img.copy()
+            yesType.setImage(frame)
 
             with open(PATH_TO_LABELS, 'r') as f:
                 labels = [line.strip() for line in f.readlines()]
@@ -146,12 +153,16 @@ class VideoStreaming():
                     xmax = int(min(imW,(boxes[i][3] * imW)))
 
                     #find bounding box center
-                    cx = (xmax - xmin)/ 2 + xmin
-                    cy = (ymax - ymin)/ 2 + ymin
+                    cx = (xmax + xmin)/ 2 
+                    cy = (ymax + ymin)/ 2 
 
+                    #frame = yesType.getImage()
+                    #find bounding box center
+                    #next change color of LEDs using pixel_center
+                        
                     #find center color
                     
-
+                    
                     # Draw label
                     object_name = labels[int(classes[i])] # Look up object name from "labels" array using class index
                     label = '%s: %d%%' % (object_name, int(scores[i]*100)) # Example: 'person: 72%'
@@ -174,6 +185,34 @@ class VideoStreaming():
                 xmax = int(min(imW,(boxes[max_index][3] * imW)))
                 self.face_x = float(xmin+xmax/2)
                 self.face_y = float(ymin+ymax/2)
+                #print(cx,cy)
+                croppedImage = frame[ymin:ymax, xmin:xmax]
+                ccx = int((xmax - xmin)/2)
+                ccy = int((ymax - ymin)/2)
+                #print(frame[cx, cy])
+                pixel = croppedImage[ccx,ccy]
+                R=pixel[2]
+                G=pixel[1]
+                B=pixel[0]
+                print(R, G, B)
+                self.led_Index=str(0x01)
+                led_Off=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+                color=self.intervalChar+str(R)+self.intervalChar+str(G)+self.intervalChar+str(B)+self.endChar
+                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                self.led_Index=str(0x02)
+                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                self.led_Index=str(0x04)
+                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                self.led_Index=str(0x08)
+                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                self.led_Index=str(0x10)
+                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                self.led_Index=str(0x20)
+                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                self.led_Index=str(0x40)
+                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                self.led_Index=str(0x80)
+                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
                 #ForWard = '#300#300#300#300\n'
                 #BackWard = '#-1500#-1500#-1500#-1500\n'
                 #Left = '#-1500#-1500#1500#1500\n'
