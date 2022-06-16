@@ -186,33 +186,34 @@ class VideoStreaming():
                 self.face_x = float(xmin+xmax/2)
                 self.face_y = float(ymin+ymax/2)
                 #print(cx,cy)
-                croppedImage = frame[ymin:ymax, xmin:xmax]
-                ccx = int((xmax - xmin)/2)
-                ccy = int((ymax - ymin)/2)
-                #print(frame[cx, cy])
-                pixel = croppedImage[ccx,ccy]
-                R=pixel[2]
-                G=pixel[1]
-                B=pixel[0]
-                print(R, G, B)
-                self.led_Index=str(0x01)
-                led_Off=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
-                color=self.intervalChar+str(R)+self.intervalChar+str(G)+self.intervalChar+str(B)+self.endChar
-                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                self.led_Index=str(0x02)
-                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                self.led_Index=str(0x04)
-                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                self.led_Index=str(0x08)
-                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                self.led_Index=str(0x10)
-                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                self.led_Index=str(0x20)
-                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                self.led_Index=str(0x40)
-                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                self.led_Index=str(0x80)
-                self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                if cType.getType() == "sports ball":
+                    croppedImage = frame[ymin:ymax, xmin:xmax]
+                    ccx = int((xmax - xmin)/2)
+                    ccy = int((ymax - ymin)/2)
+                    #print(frame[cx, cy])
+                    pixel = croppedImage[ccx,ccy]
+                    R=pixel[2]
+                    G=pixel[1]
+                    B=pixel[0]
+                    print(R, G, B)
+                    self.led_Index=str(0x01)
+                    led_Off=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+                    color=self.intervalChar+str(R)+self.intervalChar+str(G)+self.intervalChar+str(B)+self.endChar
+                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                    self.led_Index=str(0x02)
+                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                    self.led_Index=str(0x04)
+                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                    self.led_Index=str(0x08)
+                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                    self.led_Index=str(0x10)
+                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                    self.led_Index=str(0x20)
+                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                    self.led_Index=str(0x40)
+                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                    self.led_Index=str(0x80)
+                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
                 #ForWard = '#300#300#300#300\n'
                 #BackWard = '#-1500#-1500#-1500#-1500\n'
                 #Left = '#-1500#-1500#1500#1500\n'

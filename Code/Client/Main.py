@@ -634,16 +634,6 @@ class mywindow(QMainWindow,Ui_Client):
         if self.Btn_Tracking_Balls.text()=="Find Ball":
             self.Btn_Tracking_Balls.setText("Stop Looking")
             cType.setType("sports ball")
-                #R=pixelMiddle[2]
-                #G=pixelMiddle[1]
-                #B=pixelMiddle[0]
-                #print(R, G, B)
-            #led_Off=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
-            #color=self.intervalChar+str(R)+self.intervalChar+str(G)+self.intervalChar+str(B)+self.endChar
-            #self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+pixel_middle)
-            #self.led_Index=str(0x01)
-            #self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-            #self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+ le)
         else:
             self.Btn_Tracking_Balls.setText("Find Ball")
             self.led_Index=str(0x01)
@@ -691,6 +681,21 @@ class mywindow(QMainWindow,Ui_Client):
                 self.HSlider_Servo1.setValue(self.servo1)
                 self.VSlider_Servo2.setValue(self.servo2)
 
+                # Set direction that wheels need to turn to face object
+                turn_angle = math.degrees(math.atan2(delta_degree_y, delta_degree_x))
+                print(turn_angle)
+                if (math.fabs(turn_angle) <= 80) and (math.fabs(turn_angle) >= 20):
+                    #Object is straight ahead, go forward
+                    direction = self.intervalChar+str(600)+self.intervalChar+str(600)+self.intervalChar+str(600)+self.intervalChar+str(600)+self.endChar
+                elif(math.fabs(turn_angle) >= 20):
+                    # Object is on our left, turn left
+                    direction = self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.endChar
+                elif(math.fabs(turn_angle) < 20):
+                    # Object is on our right, turn right
+                    direction = self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.endChar
+                self.TCP.sendData(cmd.CMD_MOTOR+direction)
+
+
     
     def find_bottle(self,face_x,face_y):
         if face_x!=0 and face_y!=0:
@@ -710,7 +715,7 @@ class mywindow(QMainWindow,Ui_Client):
                 self.VSlider_Servo2.setValue(self.servo2)
 
                 # Set direction that wheels need to turn to face object
-                #turn_angle = math.degrees(math.atan2(delta_degree_y, delta_degree_x))
+                turn_angle = math.degrees(math.atan2(delta_degree_y, delta_degree_x))
                 #print(turn_angle)
                 #if(math.fabs(turn_angle) >= 20):
                 #    # Object is on our left, turn left
