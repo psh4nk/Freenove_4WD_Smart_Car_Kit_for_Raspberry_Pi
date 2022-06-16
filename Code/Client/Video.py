@@ -193,7 +193,7 @@ class VideoStreaming():
                     #print(frame[cx, cy])
                     
                     pixel = croppedImage[ccx,ccy]
-                    hsv_pixel = cv2.cvtColor(pixel, cv2.COLOR_BGR2HSV)
+                    hsv_pixel = cv2.cvtColor(croppedImage, cv2.COLOR_BGR2HSV)
                     pixel_center = hsv_pixel[ccy,ccx]
                     hue_value = pixel_center[0]
 
@@ -213,7 +213,7 @@ class VideoStreaming():
                         R = 255
                         G = 255
                         B = 0
-                    elif hue_value < 78:
+                    elif hue_value < 90:
                         #green
                         R = 0
                         G = 130
