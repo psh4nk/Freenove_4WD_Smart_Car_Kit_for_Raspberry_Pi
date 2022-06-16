@@ -123,6 +123,11 @@ class Server:
         except:
             pass
         try:
+            stop_thread(self.avoidRun)
+            self.PWM.setMotorModel(0,0,0,0)
+        except:
+            pass
+        try:
             stop_thread(self.lightRun)
             self.PWM.setMotorModel(0,0,0,0)
         except:
@@ -192,8 +197,8 @@ class Server:
                         elif data[1]=='five' or data[1]=="2":
                             self.stopMode()
                             self.Mode='five'
-                            self.infraredRun=threading.Thread(target=self.avoid.run)
-                            self.infraredRun.start()
+                            self.avoidRun=threading.Thread(target=self.avoid.run)
+                            self.avoidRun.start()
                             
                     elif (cmd.CMD_MOTOR in data) and self.Mode=='one':
                         try:

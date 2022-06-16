@@ -374,11 +374,11 @@ class mywindow(QMainWindow,Ui_Client):
             self.TCP.sendData(cmd.CMD_SONIC+self.intervalChar+'0'+self.endChar)
             self.Ultrasonic.setText("Ultrasonic")
     def on_btn_Avoid(self):
-        if self.Btn_Avoiding_Line.text()=="M-Avoid":
+        if self.Btn_Avoiding_Line.text()=="Avoid":
             self.TCP.sendData(cmd.CMD_AVOID+self.intervalChar+'1'+self.endChar)
         else:
             self.TCP.sendData(cmd.CMD_AVOID+self.intervalChar+'0'+self.endChar)
-            self.Btn_Avoiding_Line.setText("M-Avoid")
+            self.Btn_Avoiding_Line.setText("Avoid")
  
     def on_btn_Light(self):
         if self.Light.text() == "Light":
