@@ -639,7 +639,9 @@ class mywindow(QMainWindow,Ui_Client):
             
             #find bounding box center
             #next change color of LEDs using pixel_center
-            frame[yesType.getCX(),yesType.getCY()]
+            pixel_middle = frame[yesType.getCX(),yesType.getCY()]
+            self.led_Index=str(0x01)
+            self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+pixel_middle)
             #self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+ le)
         else:
             self.Btn_Tracking_Balls.setText("Find Ball")
