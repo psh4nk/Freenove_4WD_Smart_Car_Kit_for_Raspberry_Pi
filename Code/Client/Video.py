@@ -1,5 +1,6 @@
 #!/usr/bin/python 
 # -*- coding: utf-8 -*-
+from Code.Client.imageGetter import imageGetter
 import numpy as np
 import cv2
 import socket
@@ -16,12 +17,12 @@ import tensorflow as tf
 import importlib.util
 import time
 from CameraType import CameraType
-from imageGetter import imageGetter
 global cType
 cType = CameraType()
 global yesType
 yesType = imageGetter()
 
+pixel_center = None
 class VideoStreaming():
     def __init__(self):
         self.face_cascade = cv2.CascadeClassifier(r'haarcascade_frontalface_default.xml')
@@ -153,10 +154,16 @@ class VideoStreaming():
                     cx = (xmax - xmin)/ 2 + xmin
                     cy = (ymax - ymin)/ 2 + ymin
 
-                    #find center color
-                    pixel_center = frame[cy,cx]
-                    
+                    if cType.getType() == "sports ball":
+                        #find center color
+                        setPixelCenter(frame[cy,cx])
 
+                    def getPixelCenter(self):
+                        return self.pixel_center
+                    
+                    def setPixelCenter(self, word):
+                        self.pixel_center = word
+                    
                     # Draw label
                     object_name = labels[int(classes[i])] # Look up object name from "labels" array using class index
                     label = '%s: %d%%' % (object_name, int(scores[i]*100)) # Example: 'person: 72%'
