@@ -113,7 +113,9 @@ class mywindow(QMainWindow,Ui_Client):
         self.Btn_Mode3.setChecked(False)
         self.Btn_Mode3.toggled.connect(lambda:self.on_btn_Mode(self.Btn_Mode3))
         self.Btn_Mode4.setChecked(False)
+        self.Btn_Mode5.setChecked(False)
         self.Btn_Mode4.toggled.connect(lambda:self.on_btn_Mode(self.Btn_Mode4))
+        self.Btn_Mode5.toggled.connect(lambda:self.on_btn_Mode(self.Btn_Mode5))
         self.Btn_Tracking_Balls.setChecked(False)
         self.Btn_Tracking_Bottle.setChecked(False)
         
