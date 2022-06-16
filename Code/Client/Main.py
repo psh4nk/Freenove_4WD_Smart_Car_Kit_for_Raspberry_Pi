@@ -21,6 +21,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+global ledType
+ledType = VideoStreaming()
 
 class mywindow(QMainWindow,Ui_Client):
     def __init__(self):
@@ -634,7 +636,9 @@ class mywindow(QMainWindow,Ui_Client):
             self.Btn_Tracking_Balls.setText("Stop Looking")
             cType.setType("sports ball")
             #next change color of LEDs using pixel_center
-            self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+pixel_center)
+            frame = img.copy()
+            frame[cx,cy]
+            #self.TCP.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+ le)
         else:
             self.Btn_Tracking_Balls.setText("Find Ball")
             cType.setType("")
