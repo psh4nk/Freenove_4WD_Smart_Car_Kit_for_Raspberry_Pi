@@ -22,7 +22,7 @@ cType = CameraType()
 global yesType
 yesType = imageGetter()
 
-pixel_center = None
+
 class VideoStreaming():
     def __init__(self):
         self.face_cascade = cv2.CascadeClassifier(r'haarcascade_frontalface_default.xml')
@@ -191,11 +191,50 @@ class VideoStreaming():
                     ccx = int((xmax - xmin)/2)
                     ccy = int((ymax - ymin)/2)
                     #print(frame[cx, cy])
+                    
                     pixel = croppedImage[ccx,ccy]
-                    R=pixel[2]
-                    G=pixel[1]
-                    B=pixel[0]
-                    print(R, G, B)
+                    hsv_pixel = cv2.cvtColor(pixel, cv2.COLOR_BGR2HSV)
+                    pixel_center = hsv_pixel[ccy,ccx]
+                    hue_value = pixel_center[0]
+
+                    if hue_value < 10 or hue_value > 170:
+                        #red
+                        R = 255
+                        G = 0
+                        B = 0
+                    elif hue_value < 22:
+                        #orange
+                        R = 255
+                        G = 165
+                        B = 0
+
+                    elif hue_value < 33:
+                        #yellow
+                        R = 255
+                        G = 255
+                        B = 0
+                    elif hue_value < 78:
+                        #green
+                        R = 0
+                        G = 130
+                        B = 0
+                    elif hue_value < 140:
+                        #blue
+                        R = 0
+                        G = 0
+                        B = 255
+                    elif hue_value <= 170:
+                        #violet
+                        R = 155
+                        G = 38
+                        B = 182
+                    
+
+
+                    #R=pixel[2]
+                    #G=pixel[1]
+                    #B=pixel[0]
+                    #print(R, G, B)
                     self.led_Index=str(0x01)
                     led_Off=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
                     color=self.intervalChar+str(R)+self.intervalChar+str(G)+self.intervalChar+str(B)+self.endChar
