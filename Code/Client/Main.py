@@ -629,7 +629,7 @@ class mywindow(QMainWindow,Ui_Client):
             cType.setType("")
     
     def Tracking_Ball(self):
-        from Video import pixel_center
+        
         if self.Btn_Tracking_Balls.text()=="Find Ball":
             self.Btn_Tracking_Balls.setText("Stop Looking")
             cType.setType("sports ball")
