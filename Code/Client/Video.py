@@ -150,7 +150,6 @@ class VideoStreaming():
                     cy = (ymax - ymin)/ 2 + ymin
 
                     #find center color
-                    pixel_center = frame[cy,cx]
                     
 
                     # Draw label
