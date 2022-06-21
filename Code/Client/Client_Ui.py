@@ -190,7 +190,7 @@ class Ui_Client(object):
         self.Btn_Turn_Right.setStyleSheet("")
         self.Btn_Turn_Right.setObjectName("Btn_Turn_Right")
         self.Btn_Follow = QtWidgets.QPushButton(Client)
-        self.Btn_Follow.setGeometry(QtCore.QRect(120, 560, 90, 30))
+        self.Btn_Follow.setGeometry(QtCore.QRect(120, 610, 90, 30))
         font = QtGui.QFont()
         font.setFamily("3ds")
         font.setPointSize(10)
