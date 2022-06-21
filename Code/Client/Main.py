@@ -122,6 +122,7 @@ class mywindow(QMainWindow,Ui_Client):
         self.Btn_Tracking_Bottle.setChecked(False)
         
         self.Ultrasonic.clicked.connect(self.on_btn_Ultrasonic)
+        self.Btn_Follow.clicked.connect(self.on_btn_Follow)
         self.Btn_Avoiding_Line.clicked.connect(self.on_btn_Avoid)
         self.Light.clicked.connect(self.on_btn_Light)
         
@@ -623,6 +624,14 @@ class mywindow(QMainWindow,Ui_Client):
         return bValid
 
     def Tracking_Face(self):
+        if self.Btn_Tracking_Faces.text()=="Find Face":
+            self.Btn_Tracking_Faces.setText("Stop Looking")
+            cType.setType("person")
+        else:
+            self.Btn_Tracking_Faces.setText("Find Face")
+            cType.setType("")
+
+    def on_btn_Follow(self):
         if self.Btn_Tracking_Faces.text()=="Find Face":
             self.Btn_Tracking_Faces.setText("Stop Looking")
             cType.setType("person")
