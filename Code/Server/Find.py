@@ -27,16 +27,18 @@ class Find:
                 time.sleep(2)
                 PWM.setMotorModel(2500, 2500, -1500, -1500)
                 time.sleep(1)
-            #    elif self.LMR==2:
-            #        PWM.setMotorModel(800,800,800,800)
-            #    elif self.LMR==4:
-            #        PWM.setMotorModel(-1500,-1500,2500,2500)
-            #    elif self.LMR==6:
-            #        PWM.setMotorModel(-2000,-2000,4000,4000)
-            #    elif self.LMR==1:
-            #        PWM.setMotorModel(2500,2500,-1500,-1500)
-            #    elif self.LMR==3:
-            #        PWM.setMotorModel(4000,4000,-2000,-2000)
+            #scan
+            # if target in front
+                #PWM.setMotorModel(800, 800, 800, 800)
+                #time.sleep(2)
+            # if target on left
+                #PWM.setMotorModel(-1500, -1500, 2500, 2500)
+                #time.sleep(0.5)
+            #if target on right
+                #PWM.setMotorModel(2500, 2500, -1500, -1500)
+                #time.sleep(0.5)
+            #else
+                #PWM.setMotorModel(2500, 2500, -1500, -1500)
             
 infrared=Find()
 # Main program logic follows:
