@@ -116,13 +116,14 @@ class mywindow(QMainWindow,Ui_Client):
         self.Btn_Mode3.toggled.connect(lambda:self.on_btn_Mode(self.Btn_Mode3))
         self.Btn_Mode4.setChecked(False)
         self.Btn_Mode5.setChecked(False)
+        self.Btn_Mode6.setChecked(False)
         self.Btn_Mode4.toggled.connect(lambda:self.on_btn_Mode(self.Btn_Mode4))
         self.Btn_Mode5.toggled.connect(lambda:self.on_btn_Mode(self.Btn_Mode5))
+        self.Btn_Mode6.toggled.connect(lambda:self.on_btn_Mode(self.Btn_Mode6))
         self.Btn_Tracking_Balls.setChecked(False)
         self.Btn_Tracking_Bottle.setChecked(False)
         
         self.Ultrasonic.clicked.connect(self.on_btn_Ultrasonic)
-        self.Btn_Follow.clicked.connect(self.on_btn_Follow)
         self.Btn_Avoiding_Line.clicked.connect(self.on_btn_Avoid)
         self.Light.clicked.connect(self.on_btn_Light)
         
@@ -384,6 +385,12 @@ class mywindow(QMainWindow,Ui_Client):
         else:
             self.TCP.sendData(cmd.CMD_AVOID+self.intervalChar+'0'+self.endChar)
             self.Btn_Avoiding_Line.setText("Avoid")
+    def on_btn_Find(self):
+        if self.Btn_Avoiding_Line.text()=="Find":
+            self.TCP.sendData(cmd.CMD_FIND+self.intervalChar+'1'+self.endChar)
+        else:
+            self.TCP.sendData(cmd.CMD_FIND+self.intervalChar+'0'+self.endChar)
+            self.Btn_Avoiding_Line.setText("Find")
  
     def on_btn_Light(self):
         if self.Light.text() == "Light":
@@ -525,6 +532,11 @@ class mywindow(QMainWindow,Ui_Client):
             if Mode.isChecked() == True:
                 #self.timer.stop()
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'five'+self.endChar)
+        if Mode.text() == "M-Find":
+            if Mode.isChecked() == True:
+                #self.timer.stop()
+                self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'six'+self.endChar)
+         
          
                                   
     def on_btn_Connect(self):
@@ -631,14 +643,6 @@ class mywindow(QMainWindow,Ui_Client):
             self.Btn_Tracking_Faces.setText("Find Face")
             cType.setType("")
 
-    def on_btn_Follow(self):
-        if self.Btn_Tracking_Faces.text()=="Find Face":
-            self.Btn_Tracking_Faces.setText("Stop Looking")
-            cType.setType("person")
-        else:
-            self.Btn_Tracking_Faces.setText("Find Face")
-            cType.setType("")
-        
     def Tracking_Ball(self):
         if self.Btn_Tracking_Balls.text()=="Find Ball":
             self.Btn_Tracking_Balls.setText("Stop Looking")
