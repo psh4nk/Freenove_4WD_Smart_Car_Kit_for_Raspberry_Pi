@@ -2,6 +2,7 @@ class CameraType:
     
     word = ""
     color = ""
+    servoAngle = -300
     
     def getType(self):
         return self.word
@@ -14,3 +15,9 @@ class CameraType:
     
     def getColor(self):
         return self.color
+
+    def getAngle(self):
+        return self.servoAngle
+    
+    def setAngle(self, angle1):
+        self.servoAngle = angle1

@@ -536,7 +536,8 @@ class mywindow(QMainWindow,Ui_Client):
             if Mode.isChecked() == True:
                 #self.timer.stop()
                 cType.setType("sports ball")
-                cType.setType("red")
+                #cType.setType("red")
+                self.find_ball(self.TCP.face_x,self.TCP.face_y)
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'six'+self.endChar)
          
          
@@ -743,13 +744,15 @@ class mywindow(QMainWindow,Ui_Client):
         if face_x!=0 and face_y!=0:
             offset_x=float(face_x/400-0.5)*2
             offset_y=float(face_y/300-0.5)*2
-            delta_degree_x = 4* offset_x
-            delta_degree_y = -4 * offset_y
+            delta_degree_x = 2* offset_x
+            delta_degree_y = -2 * offset_y
 
             self.servo1=self.servo1+delta_degree_x
             self.servo2=self.servo2+delta_degree_y
 
             if offset_x > -0.15 and offset_y >-0.15 and offset_x < 0.15 and offset_y <0.15:
+                direction = self.intervalChar+str(600)+self.intervalChar+str(600)+self.intervalChar+str(600)+self.intervalChar+str(600)+self.endChar
+                self.TCP.sendData(cmd.CMD_MOTOR+direction)
                 pass
             else:
                 # Turn head to object
@@ -758,7 +761,7 @@ class mywindow(QMainWindow,Ui_Client):
 
                 # Set direction that wheels need to turn to face object
                 turn_angle = math.degrees(math.atan2(delta_degree_y, delta_degree_x))
-                print(turn_angle)
+                #print(turn_angle)
                 ##if (math.fabs(turn_angle) > 60) and (math.fabs(turn_angle) < 120):
                 ##    #Object is straight ahead, go forward
                 ##    direction = self.intervalChar+str(600)+self.intervalChar+str(600)+self.intervalChar+str(600)+self.intervalChar+str(600)+self.endChar
@@ -769,7 +772,16 @@ class mywindow(QMainWindow,Ui_Client):
                 #    # Object is on our right, turn right
                 #    direction = self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.endChar
                 #self.TCP.sendData(cmd.CMD_MOTOR+direction)
-
+                print(self.servo1)
+                cType.setAngle(self.servo1)
+                self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'seven'+self.intervalChar+str(cType.getAngle())+self.endChar)
+                #if self.servo1 > 70 and self.servo1 < 110:
+                #    direction = self.intervalChar+str(600)+self.intervalChar+str(600)+self.intervalChar+str(600)+self.intervalChar+str(600)+self.endChar
+                #elif self.servo1 < 70:
+                #    direction = self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.endChar
+                #elif self.servo1 > 110:
+                #    direction = self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.endChar
+                #self.TCP.sendData(cmd.CMD_MOTOR+direction)
     def time(self):
         self.TCP.video_Flag=False
         try:
@@ -777,7 +789,7 @@ class mywindow(QMainWindow,Ui_Client):
                 self.label_Video.setPixmap(QPixmap('video.jpg'))
                 if self.Btn_Tracking_Faces.text()=="Stop Looking":
                         self.find_face(self.TCP.face_x,self.TCP.face_y)
-                if self.Btn_Tracking_Balls.text()=="Stop Looking":
+                if self.Btn_Tracking_Balls.text()=="Stop Looking" or cType.getType() == "sports ball":
                         self.find_ball(self.TCP.face_x,self.TCP.face_y)
                 if self.Btn_Tracking_Bottle.text()=="Stop Looking":
                         self.find_bottle(self.TCP.face_x,self.TCP.face_y)
