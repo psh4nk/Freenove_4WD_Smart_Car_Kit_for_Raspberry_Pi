@@ -17,6 +17,7 @@ from Buzzer import *
 from Avoid import *
 from ADC import *
 from Thread import *
+from Find import *
 from Light import *
 from Ultrasonic import *
 from Line_Tracking import *
@@ -35,6 +36,7 @@ class Server:
         self.adc=Adc()
         self.avoid = Avoid()
         self.light=Light()
+        self.Finding = Find()
         self.infrared=Line_Tracking()
         self.infraredA=Avoid()
         self.tcp_Flag = True
@@ -198,6 +200,11 @@ class Server:
                             self.stopMode()
                             self.Mode='five'
                             self.avoidRun=threading.Thread(target=self.avoid.run)
+                            self.avoidRun.start()
+                        elif data[1]=='six' or data[1]=="2":
+                            self.stopMode()
+                            self.Mode='six'
+                            self.avoidRun=threading.Thread(target=self.Finding.run)
                             self.avoidRun.start()
                             
                     elif (cmd.CMD_MOTOR in data) and self.Mode=='one':

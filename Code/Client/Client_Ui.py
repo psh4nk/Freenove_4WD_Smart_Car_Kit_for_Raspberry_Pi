@@ -633,4 +633,5 @@ class Ui_Client(object):
         self.Btn_Avoiding_Line.setText(_translate("Client", "Avoid"))
         self.Ultrasonic.setText(_translate("Client", "Ultrasonic"))
         self.Light.setText(_translate("Client", "Light"))
+        self.Follow.setText(_translate("Client", "Light"))
 
