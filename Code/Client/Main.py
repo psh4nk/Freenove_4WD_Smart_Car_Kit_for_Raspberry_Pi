@@ -536,6 +536,7 @@ class mywindow(QMainWindow,Ui_Client):
             if Mode.isChecked() == True:
                 #self.timer.stop()
                 cType.setType("sports ball")
+                cType.setType("red")
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'six'+self.endChar)
          
          

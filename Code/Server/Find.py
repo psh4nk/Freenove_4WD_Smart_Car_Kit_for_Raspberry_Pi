@@ -27,6 +27,8 @@ class Find:
                 time.sleep(2)
                 PWM.setMotorModel(2500, 2500, -1500, -1500)
                 time.sleep(1)
+            else:
+                PWM.setMotorModel(0,0,0,0)
                 
             #scan
             # if target in front
