@@ -535,6 +535,7 @@ class mywindow(QMainWindow,Ui_Client):
         if Mode.text() == "M-Find":
             if Mode.isChecked() == True:
                 #self.timer.stop()
+                cType.setType("sports ball")
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'six'+self.endChar)
          
          

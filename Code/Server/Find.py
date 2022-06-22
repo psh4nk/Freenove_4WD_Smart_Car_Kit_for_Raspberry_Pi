@@ -19,14 +19,15 @@ class Find:
                 self.LMR=(self.LMR | 2)
             if GPIO.input(self.IR03)==True:
                 self.LMR=(self.LMR | 1)
-            if self.LMR==0:
+            #if self.LMR==0:
                 #pass
-                PWM.setMotorModel(800,800,800,800)
-            elif self.LMR > 0:
+                #PWM.setMotorModel(800,800,800,800)
+            if self.LMR > 0:
                 PWM.setMotorModel(-600,-600,-600,-600)
                 time.sleep(2)
                 PWM.setMotorModel(2500, 2500, -1500, -1500)
                 time.sleep(1)
+                
             #scan
             # if target in front
                 #PWM.setMotorModel(800, 800, 800, 800)
