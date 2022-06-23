@@ -21,8 +21,6 @@ global cType
 cType = CameraType()
 global yesType
 yesType = imageGetter()
-
-
 class VideoStreaming():
     def __init__(self):
         self.face_cascade = cv2.CascadeClassifier(r'haarcascade_frontalface_default.xml')
@@ -58,7 +56,8 @@ class VideoStreaming():
 
     def find_bottle(self,img):
         if sys.platform.startswith('win') or sys.platform.startswith('darwin'):
-
+            direction = self.intervalChar+str(800)+self.intervalChar+str(800)+self.intervalChar+str(800)+self.intervalChar+str(800)+self.endChar
+            self.sendData(cmd.CMD_MOTOR+direction)
             gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
             faces = self.face_cascade.detectMultiScale(gray,1.3,5)
 
@@ -186,6 +185,11 @@ class VideoStreaming():
                 self.face_x = float(xmin+xmax/2)
                 self.face_y = float(ymin+ymax/2)
                 #print(cx,cy)asd
+                if cType.getType() == "bottle" and cType.getColor() == "clear":
+                    R = 255
+                    G = 255
+                    B = 255
+                    self.lightingCar(R,G,B)
                 if cType.getType() == "sports ball":
                     croppedImage = frame[ymin:ymax, xmin:xmax]
                     ccx = int((xmax - xmin)/2)
@@ -196,63 +200,91 @@ class VideoStreaming():
                     hsv_pixel = cv2.cvtColor(croppedImage, cv2.COLOR_BGR2HSV)
                     pixel_center = hsv_pixel[ccy,ccx]
                     hue_value = pixel_center[0]
+                    calculation = 0
+                    if cType.getColor() != "":
+                        #while calculation < 3:
+                            if cType.getColor() == "blue":
+                                if hue_value < 140 and hue_value > 90:
+                                    print("working")
+                                    #blue
+                                    R = 0
+                                    G = 0
+                                    B = 255
+                                    self.lightingCar(R,G,B)
+                                    direction = self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+                                    self.sendData(cmd.CMD_MOTOR+direction)
+                                    calculation += 1
+                                    cType.setColor("yellow")
 
-                    if hue_value < 10 or hue_value > 170:
+                            elif cType.getColor() == "red":
+                                if hue_value < 10 or hue_value > 170:
+                                    #red
+                                    R = 255
+                                    G = 0
+                                    B = 0
+                                    self.lightingCar(R,G,B)
+                                    direction = self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+                                    self.sendData(cmd.CMD_MOTOR+direction)
+                                    calculation += 1
+                                    cType.setType("bottle")
+                                    cType.setColor("clear")
+                            elif cType.getColor() == "yellow":
+                                if hue_value < 33:
+                                    print("working")
+                                    #yellow
+                                    R = 255
+                                    G = 230
+                                    B = 0
+                                    self.lightingCar(R,G,B)
+                                    direction = self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+                                    self.sendData(cmd.CMD_MOTOR+direction)
+                                    cType.setColor("red")
+                                    calculation += 1
+                            
+                    elif hue_value < 10 or hue_value > 170:
                         #red
                         R = 255
                         G = 0
                         B = 0
+                        self.lightingCar(R,G,B)
                     elif hue_value < 22:
                         #orange
                         R = 255
                         G = 165
                         B = 0
+                        self.lightingCar(R,G,B)
 
                     elif hue_value < 33:
                         #yellow
                         R = 255
                         G = 230
                         B = 0
+                        self.lightingCar(R,G,B)
                     elif hue_value < 90:
                         #green
                         R = 0
                         G = 130
                         B = 0
+                        self.lightingCar(R,G,B)
                     elif hue_value < 140:
                         #blue
                         R = 0
                         G = 0
                         B = 255
+                        self.lightingCar(R,G,B)
                     elif hue_value <= 170:
                         #violet
                         R = 155
                         G = 38
                         B = 182
-                    
-
+                        self.lightingCar(R,G,B)
+                
 
                     #R=pixel[2]
                     #G=pixel[1]
                     #B=pixel[0]
                     #print(R, G, B)
-                    self.led_Index=str(0x01)
-                    led_Off=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
-                    color=self.intervalChar+str(R)+self.intervalChar+str(G)+self.intervalChar+str(B)+self.endChar
-                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                    self.led_Index=str(0x02)
-                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                    self.led_Index=str(0x04)
-                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                    self.led_Index=str(0x08)
-                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                    self.led_Index=str(0x10)
-                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                    self.led_Index=str(0x20)
-                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                    self.led_Index=str(0x40)
-                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
-                    self.led_Index=str(0x80)
-                    self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+                    
                 #ForWard = '#300#300#300#300\n'
                 #BackWard = '#-1500#-1500#-1500#-1500\n'
                 #Left = '#-1500#-1500#1500#1500\n'
@@ -279,7 +311,30 @@ class VideoStreaming():
         #    self.face_x=0
         #    self.face_y=0
         #cv2.imwrite('video.jpg',img)
-        
+
+    def lightingCar(self,r,g,b):
+        R = r
+        G = g
+        B = b
+        self.led_Index=str(0x01)
+        led_Off=self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+        color=self.intervalChar+str(R)+self.intervalChar+str(G)+self.intervalChar+str(B)+self.endChar
+        self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+        self.led_Index=str(0x02)
+        self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+        self.led_Index=str(0x04)
+        self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+        self.led_Index=str(0x08)
+        self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+        self.led_Index=str(0x10)
+        self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+        self.led_Index=str(0x20)
+        self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+        self.led_Index=str(0x40)
+        self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)
+        self.led_Index=str(0x80)
+        self.sendData(cmd.CMD_LED+self.intervalChar+ self.led_Index+color)   
+
     def streaming(self,ip):
         stream_bytes = b' '
         try:

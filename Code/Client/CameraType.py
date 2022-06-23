@@ -3,6 +3,7 @@ class CameraType:
     word = ""
     color = ""
     servoAngle = -300
+    ballFound = False
     
     def getType(self):
         return self.word
@@ -21,3 +22,9 @@ class CameraType:
     
     def setAngle(self, angle1):
         self.servoAngle = angle1
+
+    def getFound(self):
+        return self.ballFound
+
+    def setFound(self, found1):
+        self.ballFound = found1

@@ -535,8 +535,8 @@ class mywindow(QMainWindow,Ui_Client):
         if Mode.text() == "M-Find":
             if Mode.isChecked() == True:
                 #self.timer.stop()
+                cType.setColor("blue")
                 cType.setType("sports ball")
-                #cType.setType("red")
                 self.find_ball(self.TCP.face_x,self.TCP.face_y)
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'six'+self.endChar)
          
@@ -756,8 +756,8 @@ class mywindow(QMainWindow,Ui_Client):
                 pass
             else:
                 # Turn head to object
-                self.HSlider_Servo1.setValue(self.servo1)
-                self.VSlider_Servo2.setValue(self.servo2)
+                #self.HSlider_Servo1.setValue(self.servo1)
+                #self.VSlider_Servo2.setValue(self.servo2)
 
                 # Set direction that wheels need to turn to face object
                 turn_angle = math.degrees(math.atan2(delta_degree_y, delta_degree_x))
@@ -772,9 +772,9 @@ class mywindow(QMainWindow,Ui_Client):
                 #    # Object is on our right, turn right
                 #    direction = self.intervalChar+str(1500)+self.intervalChar+str(1500)+self.intervalChar+str(-1500)+self.intervalChar+str(-1500)+self.endChar
                 #self.TCP.sendData(cmd.CMD_MOTOR+direction)
-                print(self.servo1)
-                cType.setAngle(self.servo1)
-                self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'seven'+self.intervalChar+str(cType.getAngle())+self.endChar)
+                #print(self.servo1)
+                #cType.setAngle(self.servo1)
+                #self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'seven'+self.intervalChar+str(cType.getAngle())+self.endChar)
                 #if self.servo1 > 70 and self.servo1 < 110:
                 #    direction = self.intervalChar+str(600)+self.intervalChar+str(600)+self.intervalChar+str(600)+self.intervalChar+str(600)+self.endChar
                 #elif self.servo1 < 70:
