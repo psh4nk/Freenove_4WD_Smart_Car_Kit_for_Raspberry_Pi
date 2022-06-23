@@ -56,6 +56,8 @@ class VideoStreaming():
 
     def find_bottle(self,img):
         if sys.platform.startswith('win') or sys.platform.startswith('darwin'):
+            print("not working")
+            print("L")
             direction = self.intervalChar+str(800)+self.intervalChar+str(800)+self.intervalChar+str(800)+self.intervalChar+str(800)+self.endChar
             self.sendData(cmd.CMD_MOTOR+direction)
             gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)

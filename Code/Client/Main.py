@@ -390,6 +390,8 @@ class mywindow(QMainWindow,Ui_Client):
             self.TCP.sendData(cmd.CMD_FIND+self.intervalChar+'1'+self.endChar)
         else:
             self.TCP.sendData(cmd.CMD_FIND+self.intervalChar+'0'+self.endChar)
+            direction = self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
+            self.TCP.sendData(cmd.CMD_MOTOR+direction)
             self.Btn_Avoiding_Line.setText("Find")
  
     def on_btn_Light(self):
@@ -539,6 +541,7 @@ class mywindow(QMainWindow,Ui_Client):
                 cType.setType("sports ball")
                 self.find_ball(self.TCP.face_x,self.TCP.face_y)
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'six'+self.endChar)
+                
          
          
                                   
@@ -727,8 +730,8 @@ class mywindow(QMainWindow,Ui_Client):
                 pass
             else:
                 # Turn head to object
-                self.HSlider_Servo1.setValue(self.servo1)
-                self.VSlider_Servo2.setValue(self.servo2)
+                #self.HSlider_Servo1.setValue(self.servo1)
+                #self.VSlider_Servo2.setValue(self.servo2)
 
                 # Set direction that wheels need to turn to face object
                 turn_angle = math.degrees(math.atan2(delta_degree_y, delta_degree_x))
@@ -756,8 +759,8 @@ class mywindow(QMainWindow,Ui_Client):
                 pass
             else:
                 # Turn head to object
-                #self.HSlider_Servo1.setValue(self.servo1)
-                #self.VSlider_Servo2.setValue(self.servo2)
+                self.HSlider_Servo1.setValue(self.servo1)
+                self.VSlider_Servo2.setValue(self.servo2)
 
                 # Set direction that wheels need to turn to face object
                 turn_angle = math.degrees(math.atan2(delta_degree_y, delta_degree_x))

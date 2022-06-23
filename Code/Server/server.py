@@ -125,17 +125,26 @@ class Server:
         except:
             pass
         try:
-            stop_thread(self.avoidRun)
-            self.PWM.setMotorModel(0,0,0,0)
-        except:
-            pass
-        try:
             stop_thread(self.lightRun)
             self.PWM.setMotorModel(0,0,0,0)
         except:
             pass
         try:
             stop_thread(self.ultrasonicRun)
+            self.PWM.setMotorModel(0,0,0,0)
+            self.servo.setServoPwm('0',90)
+            self.servo.setServoPwm('1',90)
+        except:
+            pass
+        try:
+            stop_thread(self.avoidRun1)
+            self.PWM.setMotorModel(0,0,0,0)
+            self.servo.setServoPwm('0',90)
+            self.servo.setServoPwm('1',90)
+        except:
+            pass
+        try:
+            stop_thread(self.avoidRun2)
             self.PWM.setMotorModel(0,0,0,0)
             self.servo.setServoPwm('0',90)
             self.servo.setServoPwm('1',90)
@@ -199,13 +208,13 @@ class Server:
                         elif data[1]=='five' or data[1]=="2":
                             self.stopMode()
                             self.Mode='five'
-                            self.avoidRun=threading.Thread(target=self.avoid.run)
-                            self.avoidRun.start()
+                            self.avoidRun1=threading.Thread(target=self.avoid.run)
+                            self.avoidRun1.start()
                         elif data[1]=='six' or data[1]=="2":
                             self.stopMode()
                             self.Mode='six'
-                            self.avoidRun=threading.Thread(target=self.Finding.run)
-                            self.avoidRun.start()
+                            self.avoidRun2=threading.Thread(target=self.Finding.run)
+                            self.avoidRun2.start()
                             
                     elif (cmd.CMD_MOTOR in data) and self.Mode=='one':
                         try:
