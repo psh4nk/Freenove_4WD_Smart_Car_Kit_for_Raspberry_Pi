@@ -21,7 +21,7 @@ class Find:
                 self.LMR=(self.LMR | 1)
             if self.LMR==0:
                 pass
-                #PWM.setMotorModel(800,800,800,800)
+                PWM.setMotorModel(0,0,0,0)
             elif self.LMR > 0:
                 PWM.setMotorModel(-600,-600,-600,-600)
                 time.sleep(2)

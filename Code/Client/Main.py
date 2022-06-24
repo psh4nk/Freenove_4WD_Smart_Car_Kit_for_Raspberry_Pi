@@ -390,8 +390,7 @@ class mywindow(QMainWindow,Ui_Client):
             self.TCP.sendData(cmd.CMD_FIND+self.intervalChar+'1'+self.endChar)
         else:
             self.TCP.sendData(cmd.CMD_FIND+self.intervalChar+'0'+self.endChar)
-            direction = self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.intervalChar+str(0)+self.endChar
-            self.TCP.sendData(cmd.CMD_MOTOR+direction)
+            cType.setFound(False)
             self.Btn_Avoiding_Line.setText("Find")
  
     def on_btn_Light(self):
@@ -539,6 +538,7 @@ class mywindow(QMainWindow,Ui_Client):
                 #self.timer.stop()
                 cType.setColor("blue")
                 cType.setType("sports ball")
+                cType.setFound(True)
                 self.find_ball(self.TCP.face_x,self.TCP.face_y)
                 self.TCP.sendData(cmd.CMD_MODE+self.intervalChar+'six'+self.endChar)
                 
