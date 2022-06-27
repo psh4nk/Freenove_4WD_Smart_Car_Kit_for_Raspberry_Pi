@@ -283,16 +283,7 @@ class VideoStreaming():
                         self.lightingCar(R,G,B)
                 
 
-                    #R=pixel[2]
-                    #G=pixel[1]
-                    #B=pixel[0]
-                    #print(R, G, B)
-                    
-                #ForWard = '#300#300#300#300\n'
-                #BackWard = '#-1500#-1500#-1500#-1500\n'
-                #Left = '#-1500#-1500#1500#1500\n'
-                #Right = '#1500#1500#-1500#-1500\n'
-#                self.sendData(cmd.CMD_MOTOR+ForWard)
+
             else:
                 # If the desired object was not found, set face coords back to (0,0)
                 self.face_x = 0
@@ -305,15 +296,6 @@ class VideoStreaming():
             cv2.putText(frame,'FPS: {0:.2f}'.format(frame_rate_calc),(30,50),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,0),2,cv2.LINE_AA)
 
         cv2.imwrite('video.jpg', frame)
-        #if len(faces)>0 :
-        #    for (x,y,w,h) in faces:
-        #        self.face_x=float(x+w/2.0)
-        #        self.face_y=float(y+h/2.0)
-        #        img= cv2.circle(img, (int(self.face_x),int(self.face_y)), int((w+h)/4), (0, 255, 0), 2)
-        #else:
-        #    self.face_x=0
-        #    self.face_y=0
-        #cv2.imwrite('video.jpg',img)
 
     def lightingCar(self,r,g,b):
         R = r
