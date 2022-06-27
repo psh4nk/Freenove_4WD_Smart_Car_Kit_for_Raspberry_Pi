@@ -20,8 +20,7 @@ class Find:
             if GPIO.input(self.IR03)==True:
                 self.LMR=(self.LMR | 1)
             if self.LMR==0:
-                pass
-                PWM.setMotorModel(0,0,0,0)
+                PWM.setMotorModel(600,600,600,600)
             elif self.LMR > 0:
                 PWM.setMotorModel(-600,-600,-600,-600)
                 time.sleep(2)
